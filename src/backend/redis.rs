@@ -34,14 +34,19 @@ pub async fn channel<T: redis::IntoConnectionInfo + Clone>(
     ))
 }
 
-
 #[async_trait]
 impl PubSubSubscriberBackend for redis::aio::PubSub {
-    async fn subscribe<'a>(&'a mut self, topic: &str) -> Result<(), Box<dyn std::error::Error>> {
+    async fn subscribe<'a>(
+        &'a mut self,
+        topic: &str,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         self.subscribe(topic).await?;
         Ok(())
     }
-    async fn unsubscribe<'a>(&'a mut self, topic: &str) -> Result<(), Box<dyn std::error::Error>> {
+    async fn unsubscribe<'a>(
+        &'a mut self,
+        topic: &str,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         self.unsubscribe(topic).await?;
         Ok(())
     }
@@ -56,14 +61,13 @@ impl PubSubSubscriberBackend for redis::aio::PubSub {
     }
 }
 
-
 #[async_trait]
 impl<C: redis::aio::ConnectionLike + Sync + Send + 'static> PubSubPublisherBackend for C {
     async fn publish<'a>(
         &'a mut self,
         topic: &str,
         message: String,
-    ) -> Result<(), Box<dyn std::error::Error>> {
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         AsyncCommands::publish(self, topic, message).await?;
         Ok(())
     }
