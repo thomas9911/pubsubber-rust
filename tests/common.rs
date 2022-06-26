@@ -1,5 +1,5 @@
-use futures::StreamExt;
-use pubsubber::backend::{channel, publisher, subscriber};
+use pubsubber::StreamExt;
+use pubsubber::{channel, publisher, subscriber};
 use pubsubber::{PubSubPublisherBackend, PubSubSubscriberBackend};
 
 pub async fn pubsub_test(url: &str) {
