@@ -1,4 +1,6 @@
 pub mod empty;
+#[cfg(feature = "local")]
+pub mod local;
 #[cfg(feature = "nats")]
 pub mod nats;
 #[cfg(feature = "redis")]
@@ -9,6 +11,8 @@ cfg_if::cfg_if! {
         pub use crate::backend::redis::{publisher, subscriber, channel};
     } else if #[cfg(feature = "nats")] {
         pub use crate::backend::nats::{publisher, subscriber, channel};
+    } else if #[cfg(feature = "local")] {
+        pub use crate::backend::local::{publisher, subscriber, channel};
     } else {
         pub use crate::backend::empty::{publisher, subscriber, channel};
     }

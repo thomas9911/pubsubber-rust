@@ -1,10 +1,12 @@
-use crate::backend::{PubSubPublisherBackend, PubSubSubscriberBackend};
+use crate::{PubSubPublisherBackend, PubSubSubscriberBackend};
 use async_trait::async_trait;
 use futures::stream::BoxStream;
 use futures::StreamExt;
 
 use redis::AsyncCommands;
 use redis::Value;
+
+pub use redis;
 
 /// helper function to create a subscriber
 pub async fn subscriber<T: redis::IntoConnectionInfo>(

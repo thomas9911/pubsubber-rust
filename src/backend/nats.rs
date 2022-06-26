@@ -1,8 +1,10 @@
-use crate::backend::{PubSubPublisherBackend, PubSubSubscriberBackend};
+use crate::{PubSubPublisherBackend, PubSubSubscriberBackend};
 use async_nats::Client;
 use async_trait::async_trait;
 use futures::stream::{empty, BoxStream};
 use futures::StreamExt;
+
+pub use async_nats;
 
 /// helper function to create a subscriber
 /// you can create nats client manually because subscriber is implemented on `async_nats::Client`

@@ -6,6 +6,7 @@ Current backends:
 
 - Nats
 - Redis
+- Local, without external service (implemented with Circulate)
 
 ## Getting started
 
@@ -15,6 +16,10 @@ pubsubber = { version = "*", features = ["redis"] }
 
 ```toml
 pubsubber = { version = "*", features = ["nats"] }
+```
+
+```toml
+pubsubber = { version = "*", features = ["local"] }
 ```
 
 ## Examples

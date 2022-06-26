@@ -1,4 +1,4 @@
-use crate::backend::{PubSubPublisherBackend, PubSubSubscriberBackend};
+use crate::{PubSubPublisherBackend, PubSubSubscriberBackend};
 use async_trait::async_trait;
 use futures::stream::BoxStream;
 
